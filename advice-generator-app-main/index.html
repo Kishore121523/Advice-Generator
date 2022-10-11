@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles/css/styles.css">
+    <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
+
+    <title>Frontend Mentor | Advice generator app</title>
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="card">
+            <p class="id">Advice #<span id="adviceId">117</span></p>
+            <p class="advice">"The more ideas that you give away, the more ideas that will come to you."</p>
+            <img class="divider" src="./images/pattern-divider-desktop.svg" alt="">
+            <deiv class="diceOuter">
+
+                <img class="dice" src="./images/icon-dice.svg" alt="">
+            </deiv>
+        </div>
+    </div>
+
+
+
+
+</body>
+
+<script>
+    let advice = document.querySelector(".advice")
+    let id = document.querySelector("#adviceId")
+    let dice = document.querySelector(".dice")
+    async function getResponse() {
+        const response = await fetch(
+            'https://api.adviceslip.com/advice', {
+                method: 'GET',
+            }
+        );
+        const data = await response.json();
+        advice.innerHTML = data.slip.advice
+        id.innerHTML = data.slip.id
+    }
+    dice.addEventListener("click", () => {
+        getResponse();
+    })
+</script>
+
+</html>
